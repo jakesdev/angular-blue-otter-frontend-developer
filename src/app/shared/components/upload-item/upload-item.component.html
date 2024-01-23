@@ -1,0 +1,8 @@
+<div class="flex flex-col w-[150px] gap-1">
+    <div class="w-[150px] h-[150px] relative flex justify-center items-center">
+      <img class="rounded-md absolute" [src]="file.url" alt="" />
+      <div *ngIf="!file.isUploaded" class="loader absolute"></div>
+    </div>
+  <div class="flex justify-center">{{file.fileName}}</div>
+  <div class="flex justify-center text-gray-500">{{file.fileSize | fileSize}}</div>
+</div>

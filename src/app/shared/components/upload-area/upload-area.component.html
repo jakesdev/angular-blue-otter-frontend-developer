@@ -1,0 +1,32 @@
+<div class="bg-gray-100 p-4">
+  <div class="rounded-lg border-dashed border-2 border-gray-400 p-4 pb-16 cursor-pointer" appDrag (files)="filesDropped($event)">
+    <div class="flex w-full justify-end">
+      <img
+        src="./../assets/icons/icons8-close.svg"
+        (click)="close()"
+        class="cursor-pointer"
+        alt="close-icon"
+        srcset=""
+        width="20"
+      />
+    </div>
+    <div class="flex w-full justify-center">
+      <div class="flex flex-col justify-center items-center">
+        <img
+          src="./../assets/icons/upload-cloud.svg"
+          class="cursor-pointer"
+          alt="upload-icon"
+          srcset=""
+          width="80"
+        />
+        <div class="font-semibold">
+          Drag & drop photos here, or<span class="text-main" (click)="uploader.click()"> browse</span>
+        </div>
+        <div class="text-gray-400 text-[12px] font-semibold">
+          Support: JPG, JPEG, PNG, HEIC and GIF files
+        </div>
+      </div>
+    </div>
+    <input type="file" id="uploader" hidden #uploader accept=".jpg,.jpeg,.png,.heic,.gif" (change)="selectFile($event)">
+  </div>
+</div>
