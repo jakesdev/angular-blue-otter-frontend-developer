@@ -1,5 +1,5 @@
 <div class="bg-gray-100 p-4">
-  <div class="rounded-lg border-dashed border-2 border-gray-400 p-4 pb-16 cursor-pointer" appDrag (files)="filesDropped($event)">
+  <div class="rounded-lg border-dashed border-2 border-gray-400 p-4 pb-16 cursor-pointer" appDrag (files)="filesDropped($event)" (isError)="uploadFileError()">
     <div class="flex w-full justify-end">
       <img
         src="./../assets/icons/icons8-close.svg"
@@ -22,9 +22,12 @@
         <div class="font-semibold">
           Drag & drop photos here, or<span class="text-main" (click)="uploader.click()"> browse</span>
         </div>
+
+
         <div class="text-gray-400 text-[12px] font-semibold">
-          Support: JPG, JPEG, PNG, HEIC and GIF files
+          <span *ngIf="incorrectFileType" class="text-red-500 text-[12px] font-semibold">Incorrect file type, </span>Support: JPG, JPEG, PNG, HEIC and GIF files
         </div>
+
       </div>
     </div>
     <input type="file" id="uploader" hidden #uploader accept=".jpg,.jpeg,.png,.heic,.gif" (change)="selectFile($event)">

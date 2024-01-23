@@ -17,6 +17,7 @@ export interface FileHandle {
 })
 export class DragDirective {
   @Output() files: EventEmitter<FileHandle[]> = new EventEmitter();
+  @Output() isError: EventEmitter<void> = new EventEmitter<void>();
   @HostBinding('style.border') private border = '1px dashed #bcbebe';
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -38,6 +39,11 @@ export class DragDirective {
     let files: FileHandle[] = [];
     if (evt.dataTransfer) {
       for (let i = 0; i < evt.dataTransfer.files.length; i++) {
+        if (!this.isAllowedFileType(evt.dataTransfer.files[i].name)) {
+          this.isError.emit();
+          return
+        }
+
         const file = evt.dataTransfer.files[i];
         const url = this.sanitizer.bypassSecurityTrustUrl(
           window.URL.createObjectURL(file)
@@ -49,5 +55,10 @@ export class DragDirective {
       }
     }
 
+  }
+
+  isAllowedFileType(fileName: string): boolean {
+    const allowedExtensionsRegex = /\.(jpg|jpeg|png|heic|gif)$/i;
+    return allowedExtensionsRegex.test(fileName);
   }
 }

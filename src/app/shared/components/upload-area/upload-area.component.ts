@@ -9,7 +9,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './upload-area.component.scss'
 })
 export class UploadAreaComponent {
+
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>;
+  incorrectFileType: boolean = false;
+
   constructor(private uploadService: UploadService, private sanitizer: DomSanitizer) {
   }
   filesDropped(files: FileHandle[]) {
@@ -29,6 +32,13 @@ export class UploadAreaComponent {
 
   uploadMore() {
     document.getElementById('uploader')?.click();
+  }
+
+  uploadFileError() {
+    this.incorrectFileType = true;
+    setTimeout(() => {
+      this.incorrectFileType = false;
+    }, 5000)
   }
 
   close() {

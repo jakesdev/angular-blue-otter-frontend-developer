@@ -15,8 +15,6 @@ export class AppComponent {
   isShowUploadArea = true;
   isShowUploadingArea = true;
 
-
-
   hideUploadingArea() {
     this.isShowUploadingArea = false;
   }
